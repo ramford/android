@@ -18,6 +18,7 @@
     <string name="actionbar_settings">Settings</string>
     <string name="actionbar_see_details">Details</string>
     <string name="actionbar_send_file">Send</string>
+    <string name="actionbar_search_in">Search in</string>
     <string name="actionbar_descending">Descending</string>
     <string name="actionbar_sort_title">Sort by</string>
     <string name="drawer_item_all_files">All files</string>

@@ -98,7 +98,7 @@ public class UploadListActivity extends FileActivity implements UploadListFragme
             createUploadListFragment();
         } // else, the Fragment Manager makes the job on configuration changes
 
-        getSupportActionBar().setTitle(getString(R.string.uploads_view_title));
+        super.updateActionBarTitleAndHomeButtonByString(getString(R.string.uploads_view_title));
 
         mLocalBroadcastManager = LocalBroadcastManager.getInstance(this);
     }
@@ -334,7 +334,7 @@ public class UploadListActivity extends FileActivity implements UploadListFragme
     @Override
     protected void onAccountSet(boolean stateWasRecovered) {
         super.onAccountSet(stateWasRecovered);
-        getSupportActionBar().setTitle(getString(R.string.uploads_view_title));
+        super.updateActionBarTitleAndHomeButtonByString(getString(R.string.uploads_view_title));
         if (mAccountWasSet) {
             setAccountInDrawer(getAccount());
         }

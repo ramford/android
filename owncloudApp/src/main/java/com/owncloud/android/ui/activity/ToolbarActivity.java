@@ -23,8 +23,10 @@ package com.owncloud.android.ui.activity;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.textview.MaterialTextView;
 import com.owncloud.android.R;
 import com.owncloud.android.datamodel.FileDataStorageManager;
 import com.owncloud.android.datamodel.OCFile;
@@ -44,24 +46,25 @@ public abstract class ToolbarActivity extends BaseActivity {
      * want to use the toolbar.
      */
     protected void setupToolbar() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        AppBarLayout toolbar = findViewById(R.id.root_toolbar);
     }
 
     /**
      * Updates title bar and home buttons (state and icon).
      */
     protected void updateActionBarTitleAndHomeButton(OCFile chosenFile) {
-        String title = getString(R.string.default_display_name_for_root_folder);    // default
-        boolean inRoot;
 
         // choose the appropriate title
-        inRoot = (
+        boolean inRoot = (
                 chosenFile == null ||
                         (chosenFile.isFolder() && chosenFile.getParentId() == FileDataStorageManager.ROOT_PARENT_ID)
         );
+
+        String title = getString(R.string.actionbar_search_in);
         if (!inRoot) {
-            title = chosenFile.getFileName();
+            title = title.concat(" ").concat(chosenFile.getFileName());
+        } else {
+            title = title.concat(" ").concat(getString(R.string.default_display_name_for_root_folder));
         }
 
         updateActionBarTitleAndHomeButtonByString(title);
@@ -78,21 +81,24 @@ public abstract class ToolbarActivity extends BaseActivity {
         }
 
         // set the chosen title
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(titleToSet);
+        MaterialTextView toolbarTitle = findViewById(R.id.root_toolbar_title);
+        SearchView searchview = findViewById(R.id.root_toolbar_search_view);
 
-        // also as content description
-        View actionBarTitleView = getWindow().getDecorView().findViewById(
-                getResources().getIdentifier("action_bar_title", "id", "android")
-        );
-        // TODO remove legacy code
-        if (actionBarTitleView != null) {    // it's null in Android 2.x
-            actionBarTitleView.setContentDescription(titleToSet);
-        }
+        toolbarTitle.setText(titleToSet);
+        toolbarTitle.setVisibility(View.VISIBLE);
+        searchview.setVisibility(View.GONE);
 
-        // set home button properties
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayShowTitleEnabled(true);
+        toolbarTitle.setOnClickListener(v -> {
+            searchview.setVisibility(View.VISIBLE);
+            toolbarTitle.setVisibility(View.GONE);
+            searchview.setIconified(false);
+        });
+
+        searchview.setOnCloseListener(() -> {
+            searchview.setVisibility(View.GONE);
+            toolbarTitle.setVisibility(View.VISIBLE);
+            return false;
+        });
     }
 
     /**

@@ -35,11 +35,13 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.drawerlayout.widget.DrawerLayout.DrawerListener
 import androidx.lifecycle.Observer
+import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.navigation.NavigationView
 import com.owncloud.android.BuildConfig
 import com.owncloud.android.MainApp.Companion.initDependencyInjection
@@ -443,8 +445,14 @@ abstract class DrawerActivity : ToolbarActivity() {
     override fun updateActionBarTitleAndHomeButton(chosenFile: OCFile?) {
         super.updateActionBarTitleAndHomeButton(chosenFile)
 
-        /// set home button properties
-        drawerToggle?.isDrawerIndicatorEnabled = isRoot(chosenFile)
+        val toolbarLeftIcon = findViewById<ShapeableImageView>(R.id.root_toolbar_left_icon)
+        if (isRoot(chosenFile)) {
+            toolbarLeftIcon.setOnClickListener { openDrawer() }
+            toolbarLeftIcon.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.ic_drawer_icon))
+        } else {
+            toolbarLeftIcon.setOnClickListener { onBackPressed() }
+            toolbarLeftIcon.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.ic_arrow_back))
+        }
     }
 
     /**

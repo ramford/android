@@ -100,7 +100,6 @@ public class FolderPickerActivity extends FileActivity implements FileFragment.C
 
         // Action bar setup
         setupToolbar();
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
 
         // sets message for empty list of folders
         setBackgroundText();
@@ -328,16 +327,9 @@ public class FolderPickerActivity extends FileActivity implements FileFragment.C
     }
 
     protected void updateNavigationElementsInActionBar() {
-        ActionBar actionBar = getSupportActionBar();
         OCFile currentDir = getCurrentFolder();
         boolean atRoot = (currentDir == null || currentDir.getParentId() == 0);
-        actionBar.setDisplayHomeAsUpEnabled(!atRoot);
-        actionBar.setHomeButtonEnabled(!atRoot);
-        actionBar.setTitle(
-                atRoot
-                        ? getString(R.string.default_display_name_for_root_folder)
-                        : currentDir.getFileName()
-        );
+        super.updateActionBarTitleAndHomeButtonByString(atRoot ? getString(R.string.default_display_name_for_root_folder) : currentDir.getFileName());
     }
 
     /**

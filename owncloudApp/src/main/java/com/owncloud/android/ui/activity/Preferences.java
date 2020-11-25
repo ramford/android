@@ -43,6 +43,7 @@ import android.widget.Toast;
 import androidx.annotation.LayoutRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatDelegate;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.owncloud.android.BuildConfig;
 import com.owncloud.android.MainApp;
@@ -350,7 +351,7 @@ public class Preferences extends PreferenceActivity {
             mPrefTouchesWithOtherVisibleWindows.setOnPreferenceChangeListener(
                     (preference, newValue) -> {
                         if ((Boolean) newValue) {
-                            new AlertDialog.Builder(this)
+                            new MaterialAlertDialogBuilder(this)
                                     .setTitle(getString(R.string.confirmation_touches_with_other_windows_title))
                                     .setMessage(getString(R.string.confirmation_touches_with_other_windows_message))
                                     .setNegativeButton(getString(R.string.common_no), null)
@@ -574,7 +575,7 @@ public class Preferences extends PreferenceActivity {
             }
         } else {
             if (!initializing) {
-                new AlertDialog.Builder(this)
+                new MaterialAlertDialogBuilder(this)
                         .setTitle(getString(R.string.confirmation_disable_camera_uploads_title))
                         .setMessage(getString(R.string.confirmation_disable_pictures_upload_message))
                         .setNegativeButton(getString(R.string.common_no), (dialog, which) -> {
@@ -617,7 +618,7 @@ public class Preferences extends PreferenceActivity {
             }
         } else {
             if (!initializing) {
-                new AlertDialog.Builder(this)
+                new MaterialAlertDialogBuilder(this)
                         .setTitle(getString(R.string.confirmation_disable_camera_uploads_title))
                         .setMessage(getString(R.string.confirmation_disable_videos_upload_message))
                         .setNegativeButton(getString(R.string.common_no), (dialog, which) -> {
@@ -973,7 +974,7 @@ public class Preferences extends PreferenceActivity {
      * @param message message to show in the dialog
      */
     private void showSimpleDialog(String message) {
-        new AlertDialog.Builder(this)
+        new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.common_important)
                 .setMessage(message)
                 .setPositiveButton(getString(android.R.string.ok), null)

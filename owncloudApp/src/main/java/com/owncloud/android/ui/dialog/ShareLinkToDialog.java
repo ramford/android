@@ -38,6 +38,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.owncloud.android.R;
 import com.owncloud.android.ui.activity.CopyToClipboardActivity;
 import timber.log.Timber;
@@ -121,7 +122,7 @@ public class ShareLinkToDialog extends DialogFragment {
             titleId = R.string.activity_chooser_title;
         }
 
-        return new AlertDialog.Builder(getActivity())
+        return new MaterialAlertDialogBuilder(getActivity())
                 .setTitle(titleId)
                 .setAdapter(mAdapter, new DialogInterface.OnClickListener() {
                     @Override

@@ -44,6 +44,7 @@ import com.google.android.exoplayer2.trackselection.TrackSelection;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.owncloud.android.R;
 import com.owncloud.android.ui.activity.FileActivity;
 import timber.log.Timber;
@@ -215,7 +216,7 @@ public class PreviewVideoActivity extends FileActivity implements ExoPlayer.Even
      */
     private void showAlertDialog(PreviewVideoError previewVideoError) {
 
-        new AlertDialog.Builder(this)
+        new MaterialAlertDialogBuilder(this)
                 .setMessage(previewVideoError.getErrorMessage())
                 .setPositiveButton(android.R.string.VideoView_error_button, (dialog, whichButton) -> finish())
                 .setCancelable(false)

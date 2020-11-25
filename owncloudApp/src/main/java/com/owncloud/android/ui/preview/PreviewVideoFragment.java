@@ -51,6 +51,7 @@ import com.google.android.exoplayer2.trackselection.TrackSelection;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.owncloud.android.R;
 import com.owncloud.android.datamodel.FileDataStorageManager;
 import com.owncloud.android.datamodel.OCFile;
@@ -485,7 +486,7 @@ public class PreviewVideoFragment extends FileFragment implements View.OnClickLi
      * @param previewVideoError player error with the needed info
      */
     private void showAlertDialog(final PreviewVideoError previewVideoError) {
-        new AlertDialog.Builder(getActivity())
+        new MaterialAlertDialogBuilder(getActivity())
                 .setMessage(previewVideoError.getErrorMessage())
                 .setPositiveButton(android.R.string.VideoView_error_button,
                         (dialog, whichButton) -> {

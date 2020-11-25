@@ -37,6 +37,7 @@ import android.os.Parcelable;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.owncloud.android.R;
 import com.owncloud.android.authentication.AccountUtils;
@@ -318,7 +319,7 @@ public class FileActivity extends DrawerActivity
 
     protected void showRequestAccountChangeNotice(String errorMessage, boolean mustChange) {
         if (mustChange) {
-            new AlertDialog.Builder(this)
+            new MaterialAlertDialogBuilder(this)
                     .setTitle(R.string.auth_failure_snackbar_action)
                     .setMessage(errorMessage)
                     .setPositiveButton(android.R.string.yes, (dialog, which) -> startActivity(

@@ -23,8 +23,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include
-        layout="@layout/root_toolbar" />
+    <include layout="@layout/root_toolbar" />
 
     <ListView
         android:id="@+id/account_list"

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.AppBarLayout
+    android:id="@+id/owncloud_app_bar"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="?android:actionBarSize"
+    android:background="@color/primary">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/root_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/standard_half_margin"
+        android:layout_marginTop="@dimen/standard_half_margin"
+        android:layout_marginEnd="@dimen/standard_half_margin"
+        android:layout_marginBottom="@dimen/standard_half_margin"
+        android:backgroundTint="@color/white"
+        app:cardCornerRadius="6dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/root_toolbar_left_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:padding="@dimen/standard_half_padding"
+                android:src="@drawable/ic_drawer_icon"
+                android:tint="@color/primary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/root_toolbar_search_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center_vertical"
+                android:textSize="16sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/root_toolbar_avatar"
+                app:layout_constraintStart_toEndOf="@+id/root_toolbar_left_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:searchHintIcon="@null" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/root_toolbar_title"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/standard_half_margin"
+                android:layout_marginEnd="@dimen/standard_half_margin"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/root_toolbar_avatar"
+                app:layout_constraintStart_toEndOf="@+id/root_toolbar_left_icon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/root_toolbar_avatar"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:padding="@dimen/standard_half_padding"
+                android:src="@drawable/ic_account_circle"
+                android:tint="@color/primary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/standard_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+</com.google.android.material.appbar.AppBarLayout>

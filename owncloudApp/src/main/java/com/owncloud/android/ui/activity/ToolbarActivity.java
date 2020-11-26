@@ -24,8 +24,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
-import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.textview.MaterialTextView;
 import com.owncloud.android.R;
 import com.owncloud.android.datamodel.FileDataStorageManager;
@@ -46,7 +44,6 @@ public abstract class ToolbarActivity extends BaseActivity {
      * want to use the toolbar.
      */
     protected void setupToolbar() {
-        AppBarLayout toolbar = findViewById(R.id.root_toolbar);
     }
 
     /**

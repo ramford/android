@@ -89,7 +89,7 @@ public class PreviewImageActivity extends FileActivity implements
 
         // ActionBar
         ActionBar actionBar = getSupportActionBar();
-        updateActionBarTitleAndHomeButton(null);
+        //updateActionBarTitleAndHomeButton(null);
         actionBar.hide();
 
         /// FullScreen and Immersive Mode

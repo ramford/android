@@ -22,7 +22,7 @@
 
         <include
             android:id="@+id/app_bar_layout"
-            layout="@layout/root_toolbar" />
+            layout="@layout/owncloud_toolbar" />
 
     <include
         layout="@layout/nav_main_container"

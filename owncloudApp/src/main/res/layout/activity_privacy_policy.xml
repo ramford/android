@@ -25,8 +25,7 @@
     android:filterTouchesWhenObscured="true"
     >
 
-    <include
-        layout="@layout/toolbar_standard" />
+    <include layout="@layout/owncloud_toolbar" />
 
     <!-- last to draw, will be top in Z axis -->
     <include layout="@layout/top_progress_bar" />

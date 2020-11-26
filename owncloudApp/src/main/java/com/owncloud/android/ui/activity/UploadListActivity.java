@@ -51,6 +51,7 @@ import com.owncloud.android.files.services.TransferRequester;
 import com.owncloud.android.lib.common.operations.RemoteOperation;
 import com.owncloud.android.lib.common.operations.RemoteOperationResult;
 import com.owncloud.android.operations.CheckCurrentCredentialsOperation;
+import com.owncloud.android.presentation.ui.toolbar.ToolbarStatus;
 import com.owncloud.android.ui.fragment.UploadListFragment;
 import com.owncloud.android.utils.MimetypeIconUtil;
 import timber.log.Timber;
@@ -85,7 +86,7 @@ public class UploadListActivity extends FileActivity implements UploadListFragme
         setFile(null);
 
         // setup toolbar
-        setupToolbar();
+        setupToolbar(ToolbarStatus.TOOLBAR_ROOT);
 
         // setup drawer
         setupDrawer();

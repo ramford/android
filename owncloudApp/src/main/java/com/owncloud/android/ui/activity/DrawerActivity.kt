@@ -50,6 +50,7 @@ import com.owncloud.android.authentication.AccountUtils
 import com.owncloud.android.datamodel.OCFile
 import com.owncloud.android.lib.common.OwnCloudAccount
 import com.owncloud.android.presentation.UIResult
+import com.owncloud.android.presentation.ui.toolbar.ToolbarActivity
 import com.owncloud.android.presentation.viewmodels.drawer.DrawerViewModel
 import com.owncloud.android.utils.AvatarUtils
 import com.owncloud.android.utils.DisplayUtils

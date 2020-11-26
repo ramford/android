@@ -24,6 +24,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.owncloud.android.R
+import com.owncloud.android.presentation.ui.toolbar.ToolbarActivity
+import com.owncloud.android.presentation.ui.toolbar.ToolbarStatus
 import info.hannes.logcat.BothLogsFragment
 import info.hannes.logcat.LogcatFragment
 import info.hannes.timber.fileLoggingTree
@@ -34,7 +36,7 @@ class LogHistoryActivity : ToolbarActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.logs)
-        setupToolbar()
+        setupToolbar(ToolbarStatus.TOOLBAR_STANDARD)
 
         // Check that the activity is using the layout version with the fragment_container FrameLayout
         if (findViewById<View>(R.id.fragment_container) != null) {

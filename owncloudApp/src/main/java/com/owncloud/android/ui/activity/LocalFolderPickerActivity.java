@@ -37,6 +37,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import com.owncloud.android.R;
+import com.owncloud.android.presentation.ui.toolbar.ToolbarActivity;
+import com.owncloud.android.presentation.ui.toolbar.ToolbarStatus;
 import com.owncloud.android.ui.fragment.LocalFileListFragment;
 import com.owncloud.android.utils.PreferenceUtils;
 import timber.log.Timber;
@@ -140,7 +142,7 @@ public class LocalFolderPickerActivity extends ToolbarActivity implements LocalF
         });
 
         // init toolbar
-        setupToolbar();
+        setupToolbar(ToolbarStatus.TOOLBAR_PICKER);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayShowTitleEnabled(true);

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.appbar.AppBarLayout
-    android:id="@+id/owncloud_app_bar"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/owncloud_app_bar"
     android:layout_width="match_parent"
     android:layout_height="?android:actionBarSize"
     android:background="@color/primary">
@@ -78,5 +77,8 @@
         android:id="@+id/standard_toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone" />
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ownCloud.Appbar"
+        android:visibility="gone"
+        app:popupTheme="?attr/actionBarPopupTheme" />
 </com.google.android.material.appbar.AppBarLayout>

@@ -48,6 +48,7 @@ import com.owncloud.android.files.services.FileDownloader;
 import com.owncloud.android.files.services.FileUploader;
 import com.owncloud.android.presentation.ui.authentication.AuthenticatorConstants;
 import com.owncloud.android.presentation.ui.authentication.LoginActivity;
+import com.owncloud.android.presentation.ui.toolbar.ToolbarStatus;
 import com.owncloud.android.services.OperationsService;
 import com.owncloud.android.ui.adapter.AccountListAdapter;
 import com.owncloud.android.ui.adapter.AccountListItem;
@@ -99,7 +100,7 @@ public class ManageAccountsActivity extends FileActivity
                 PreferenceUtils.shouldDisallowTouchesWithOtherVisibleWindows(getApplicationContext())
         );
 
-        setupToolbar();
+        setupToolbar(ToolbarStatus.TOOLBAR_STANDARD);
         updateActionBarTitleAndHomeButtonByString(getResources().getString(R.string.prefs_manage_accounts));
 
         Account[] accountList = AccountManager.get(this).getAccountsByType(MainApp.Companion.getAccountType());

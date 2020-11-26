@@ -50,6 +50,7 @@ import com.owncloud.android.lib.common.operations.RemoteOperationResult.ResultCo
 import com.owncloud.android.operations.CreateFolderOperation;
 import com.owncloud.android.operations.RefreshFolderOperation;
 import com.owncloud.android.operations.common.SyncOperation;
+import com.owncloud.android.presentation.ui.toolbar.ToolbarStatus;
 import com.owncloud.android.syncadapter.FileSyncAdapter;
 import com.owncloud.android.ui.dialog.CreateFolderDialogFragment;
 import com.owncloud.android.ui.errorhandling.ErrorMessageAdapter;
@@ -99,7 +100,7 @@ public class FolderPickerActivity extends FileActivity implements FileFragment.C
         initControls();
 
         // Action bar setup
-        setupToolbar();
+        setupToolbar(ToolbarStatus.TOOLBAR_PICKER);
 
         // sets message for empty list of folders
         setBackgroundText();

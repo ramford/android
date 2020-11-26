@@ -81,6 +81,7 @@ import com.owncloud.android.presentation.ui.files.SortOptionsView;
 import com.owncloud.android.presentation.ui.files.SortOrder;
 import com.owncloud.android.presentation.ui.files.SortType;
 import com.owncloud.android.presentation.ui.files.ViewType;
+import com.owncloud.android.presentation.ui.toolbar.ToolbarStatus;
 import com.owncloud.android.syncadapter.FileSyncAdapter;
 import com.owncloud.android.ui.adapter.ReceiveExternalFilesAdapter;
 import com.owncloud.android.ui.asynctasks.CopyAndUploadContentUrisTask;
@@ -399,7 +400,7 @@ public class ReceiveExternalFilesActivity extends FileActivity
 
     private void populateDirectoryList() {
         setContentView(R.layout.uploader_layout);
-        setupToolbar();
+        setupToolbar(ToolbarStatus.TOOLBAR_STANDARD);
         ActionBar actionBar = getSupportActionBar();
 
         mSortOptionsView = findViewById(R.id.options_layout);

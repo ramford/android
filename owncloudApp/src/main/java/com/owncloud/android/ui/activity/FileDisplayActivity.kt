@@ -81,6 +81,7 @@ import com.owncloud.android.operations.RemoveFileOperation
 import com.owncloud.android.operations.RenameFileOperation
 import com.owncloud.android.operations.SynchronizeFileOperation
 import com.owncloud.android.operations.UploadFileOperation
+import com.owncloud.android.presentation.ui.toolbar.ToolbarStatus
 import com.owncloud.android.syncadapter.FileSyncAdapter
 import com.owncloud.android.ui.errorhandling.ErrorMessageAdapter
 import com.owncloud.android.ui.fragment.FileDetailFragment
@@ -191,7 +192,7 @@ class FileDisplayActivity : FileActivity(), FileFragment.ContainerActivity, OnEn
         setContentView(R.layout.activity_main)
 
         // setup toolbar
-        setupToolbar()
+        setupToolbar(ToolbarStatus.TOOLBAR_ROOT)
 
         // setup drawer
         setupDrawer()

@@ -32,7 +32,8 @@ import android.widget.ProgressBar;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.owncloud.android.R;
-import com.owncloud.android.utils.DisplayUtils;
+import com.owncloud.android.presentation.ui.toolbar.ToolbarActivity;
+import com.owncloud.android.presentation.ui.toolbar.ToolbarStatus;
 import com.owncloud.android.utils.PreferenceUtils;
 
 /**
@@ -46,7 +47,7 @@ public class PrivacyPolicyActivity extends ToolbarActivity {
 
         setContentView(R.layout.activity_privacy_policy);
 
-        setupToolbar();
+        setupToolbar(ToolbarStatus.TOOLBAR_STANDARD);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

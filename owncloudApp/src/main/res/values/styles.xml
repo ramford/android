@@ -41,7 +41,7 @@
         <item name="colorAccent">@color/color_accent</item>
 
         <!-- default theme for alert dialogs -->
-        <item name="alertDialogTheme">@style/Theme.ownCloud.AlertDialog</item>
+        <item name="materialAlertDialogTheme">@style/Theme.ownCloud.AlertDialog</item>
 
         <!-- style for search view -->
         <item name="searchViewStyle">@style/ownCloud.SearchView</item>
@@ -83,7 +83,7 @@
     <!-- DIALOG THEMES: styles for DIALOGs -->
 
     <!-- DEFAULT (via Theme.ownCloud), and explicitly used ONCE, in Preference "behaviour" for instant uploads - NO MORE, not needed, it's default -->
-    <style name="Theme.ownCloud.AlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <style name="Theme.ownCloud.AlertDialog" parent="Theme.MaterialComponents.Light.Dialog.Alert">
         <item name="colorAccent">@color/color_accent</item>
         <item name="android:textColorPrimary">@color/primary</item>
         <item name="searchViewStyle">@style/ownCloud.SearchView</item>
@@ -169,6 +169,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:height">@null</item>
         <item name="android:minHeight">@null</item>
+        <item name="android:textColor">@color/primary</item>
     </style>
 
     <style name="Theme.ownCloud.Dialog.ButtonBar.Button" parent="@style/Widget.AppCompat.Button.Borderless.Colored">
@@ -176,6 +177,7 @@
             but instead they span further out of the dialog, breaking in multiple lines though -->
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/primary</item>
         <!-- setting a fixed width as follows results in narrow buttons with line breaks, but of course this is not a solution -->
         <!-- <item name="android:width">100dp</item> -->
     </style>

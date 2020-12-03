@@ -51,6 +51,7 @@ import com.owncloud.android.datamodel.OCFile
 import com.owncloud.android.lib.common.OwnCloudAccount
 import com.owncloud.android.presentation.UIResult
 import com.owncloud.android.presentation.ui.toolbar.ToolbarActivity
+import com.owncloud.android.presentation.ui.toolbar.ToolbarConfig
 import com.owncloud.android.presentation.viewmodels.drawer.DrawerViewModel
 import com.owncloud.android.utils.AvatarUtils
 import com.owncloud.android.utils.DisplayUtils
@@ -236,6 +237,20 @@ abstract class DrawerActivity : ToolbarActivity() {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         }
         startActivity(intent)
+    }
+
+    /**
+     * Updates title bar and home buttons (state and icon).
+     *
+     * Assumes that navigation drawer is NOT visible.
+     */
+    override fun setupToolbar(toolbarConfig: ToolbarConfig){
+        super.setupToolbar(toolbarConfig)
+
+        if (toolbarConfig is ToolbarConfig.ToolbarRoot) {
+            val toolbarLeftIcon = findViewById<ShapeableImageView>(R.id.root_toolbar_left_icon)
+            toolbarLeftIcon.setOnClickListener { openDrawer() }
+        }
     }
 
     /**
@@ -435,25 +450,6 @@ abstract class DrawerActivity : ToolbarActivity() {
                 is UIResult.Error -> account_quota_text?.text = getString(R.string.drawer_unavailable_used_storage)
             }
         })
-    }
-
-    /**
-     * Updates title bar and home buttons (state and icon).
-     *
-     *
-     * Assumes that navigation drawer is NOT visible.
-     */
-    override fun updateActionBarTitleAndHomeButton(chosenFile: OCFile?) {
-        super.updateActionBarTitleAndHomeButton(chosenFile)
-
-        val toolbarLeftIcon = findViewById<ShapeableImageView>(R.id.root_toolbar_left_icon)
-        if (isRoot(chosenFile)) {
-            toolbarLeftIcon.setOnClickListener { openDrawer() }
-            toolbarLeftIcon.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.ic_drawer_icon))
-        } else {
-            toolbarLeftIcon.setOnClickListener { onBackPressed() }
-            toolbarLeftIcon.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.ic_arrow_back))
-        }
     }
 
     /**

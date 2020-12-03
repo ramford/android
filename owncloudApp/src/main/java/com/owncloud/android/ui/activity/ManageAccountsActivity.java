@@ -36,8 +36,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.core.content.ContextCompat;
@@ -50,7 +48,7 @@ import com.owncloud.android.files.services.FileDownloader;
 import com.owncloud.android.files.services.FileUploader;
 import com.owncloud.android.presentation.ui.authentication.AuthenticatorConstants;
 import com.owncloud.android.presentation.ui.authentication.LoginActivity;
-import com.owncloud.android.presentation.ui.toolbar.ToolbarStatus;
+import com.owncloud.android.presentation.ui.toolbar.ToolbarConfig;
 import com.owncloud.android.services.OperationsService;
 import com.owncloud.android.ui.adapter.AccountListAdapter;
 import com.owncloud.android.ui.adapter.AccountListItem;
@@ -74,9 +72,8 @@ public class ManageAccountsActivity extends FileActivity
 
     public static final String KEY_ACCOUNT_LIST_CHANGED = "ACCOUNT_LIST_CHANGED";
     public static final String KEY_CURRENT_ACCOUNT_CHANGED = "CURRENT_ACCOUNT_CHANGED";
-
-    private ListView mListView;
     private final Handler mHandler = new Handler();
+    private ListView mListView;
     private String mAccountBeingRemoved;
     private AccountListAdapter mAccountListAdapter;
     protected FileUploader.FileUploaderBinder mUploaderBinder = null;
@@ -102,8 +99,11 @@ public class ManageAccountsActivity extends FileActivity
                 PreferenceUtils.shouldDisallowTouchesWithOtherVisibleWindows(getApplicationContext())
         );
 
-        setupToolbar(ToolbarStatus.TOOLBAR_STANDARD);
-        updateActionBarTitleAndHomeButtonByString(getResources().getString(R.string.prefs_manage_accounts));
+        ToolbarConfig.ToolbarStandard toolbarConfig = new ToolbarConfig.ToolbarStandard(
+                getResources().getString(R.string.prefs_manage_accounts),
+                true
+        );
+        setupToolbar(toolbarConfig);
 
         Account[] accountList = AccountManager.get(this).getAccountsByType(MainApp.Companion.getAccountType());
         mOriginalAccounts = toAccountNameSet(accountList);
@@ -115,12 +115,7 @@ public class ManageAccountsActivity extends FileActivity
         initializeComponentGetters();
 
         // added click listener to switch account
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switchAccount(position);
-            }
-        });
+        mListView.setOnItemClickListener((parent, view, position, id) -> switchAccount(position));
     }
 
     @Override
@@ -137,7 +132,7 @@ public class ManageAccountsActivity extends FileActivity
      * @return set of account names
      */
     private Set<String> toAccountNameSet(Account[] accountList) {
-        Set<String> actualAccounts = new HashSet<String>(accountList.length);
+        Set<String> actualAccounts = new HashSet<>(accountList.length);
         for (Account account : accountList) {
             actualAccounts.add(account.name);
         }

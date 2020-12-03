@@ -34,12 +34,10 @@ import android.accounts.AuthenticatorException
 import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.ComponentName
-import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.ServiceConnection
-import android.content.SyncRequest
 import android.content.pm.PackageManager
 import android.content.res.Resources.NotFoundException
 import android.net.Uri
@@ -60,8 +58,6 @@ import com.owncloud.android.authentication.PassCodeManager
 import com.owncloud.android.authentication.PatternManager
 import com.owncloud.android.datamodel.FileDataStorageManager
 import com.owncloud.android.datamodel.OCFile
-import com.owncloud.android.db.PreferenceManager
-import com.owncloud.android.db.PreferenceManager.getSortOrder
 import com.owncloud.android.extensions.showMessageInSnackbar
 import com.owncloud.android.files.services.FileDownloader
 import com.owncloud.android.files.services.FileDownloader.FileDownloaderBinder
@@ -81,7 +77,7 @@ import com.owncloud.android.operations.RemoveFileOperation
 import com.owncloud.android.operations.RenameFileOperation
 import com.owncloud.android.operations.SynchronizeFileOperation
 import com.owncloud.android.operations.UploadFileOperation
-import com.owncloud.android.presentation.ui.toolbar.ToolbarStatus
+import com.owncloud.android.presentation.ui.toolbar.ToolbarConfig
 import com.owncloud.android.syncadapter.FileSyncAdapter
 import com.owncloud.android.ui.errorhandling.ErrorMessageAdapter
 import com.owncloud.android.ui.fragment.FileDetailFragment
@@ -98,7 +94,6 @@ import com.owncloud.android.ui.preview.PreviewVideoActivity
 import com.owncloud.android.ui.preview.PreviewVideoFragment
 import com.owncloud.android.utils.DisplayUtils
 import com.owncloud.android.utils.Extras
-import com.owncloud.android.utils.FileStorageUtils
 import com.owncloud.android.utils.PermissionUtil
 import com.owncloud.android.utils.PreferenceUtils
 import kotlinx.android.synthetic.main.nav_coordinator_layout.*
@@ -191,8 +186,12 @@ class FileDisplayActivity : FileActivity(), FileFragment.ContainerActivity, OnEn
         // Inflate and set the layout view
         setContentView(R.layout.activity_main)
 
+        val toolbarConfig = ToolbarConfig.ToolbarRoot(
+            title = "PAcpo",
+            enableSearch = true
+        )
         // setup toolbar
-        setupToolbar(ToolbarStatus.TOOLBAR_ROOT)
+        setupToolbar(toolbarConfig)
 
         // setup drawer
         setupDrawer()
@@ -201,9 +200,6 @@ class FileDisplayActivity : FileActivity(), FileFragment.ContainerActivity, OnEn
 
         leftFragmentContainer = findViewById(R.id.left_fragment_container)
         rightFragmentContainer = findViewById(R.id.right_fragment_container)
-
-        // Action bar setup
-        supportActionBar?.setHomeButtonEnabled(true)
 
         // Init Fragment without UI to retain AsyncTask across configuration changes
         val fm = supportFragmentManager
@@ -1126,20 +1122,21 @@ class FileDisplayActivity : FileActivity(), FileFragment.ContainerActivity, OnEn
         setFile(file)
     }
 
-    override fun updateActionBarTitleAndHomeButton(chosenFileFromParam: OCFile?) {
+    fun updateActionBarTitleAndHomeButton(chosenFileFromParam: OCFile?) {
         var chosenFile = chosenFileFromParam
         if (chosenFile == null) {
             chosenFile = file     // if no file is passed, current file decides
         }
-        super.updateActionBarTitleAndHomeButton(chosenFile!!)
-        if (chosenFile?.remotePath == OCFile.ROOT_PATH && (!fileListOption.isAllFiles())) {
+        if (chosenFile?.remotePath == OCFile.ROOT_PATH) {
             val title =
-                when {
-                    fileListOption.isAvailableOffline() -> resources.getString(R.string.drawer_item_only_available_offline)
-                    fileListOption.isSharedByLink() -> resources.getString(R.string.drawer_item_shared_by_link_files)
-                    else -> null // Should not happen -> will show R.string.app_name
+                when (fileListOption) {
+                    FileListOption.AV_OFFLINE -> resources.getString(R.string.drawer_item_only_available_offline)
+                    FileListOption.SHARED_BY_LINK -> resources.getString(R.string.drawer_item_shared_by_link_files)
+                    FileListOption.ALL_FILES -> resources.getString(R.string.default_display_name_for_root_folder)
                 }
-            updateActionBarTitleAndHomeButtonByString(title)
+            setupToolbar(ToolbarConfig.ToolbarRoot(title, true))
+        } else {
+            setupToolbar(ToolbarConfig.ToolbarStandard(chosenFile?.fileName!!, true))
         }
     }
 

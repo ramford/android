@@ -25,7 +25,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.owncloud.android.R
 import com.owncloud.android.presentation.ui.toolbar.ToolbarActivity
-import com.owncloud.android.presentation.ui.toolbar.ToolbarStatus
+import com.owncloud.android.presentation.ui.toolbar.ToolbarConfig.ToolbarStandard
 import info.hannes.logcat.BothLogsFragment
 import info.hannes.logcat.LogcatFragment
 import info.hannes.timber.fileLoggingTree
@@ -36,7 +36,12 @@ class LogHistoryActivity : ToolbarActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.logs)
-        setupToolbar(ToolbarStatus.TOOLBAR_STANDARD)
+        setupToolbar(
+            ToolbarStandard(
+                title = getString(R.string.actionbar_logger),
+                addIconNavigation = false
+            )
+        )
 
         // Check that the activity is using the layout version with the fragment_container FrameLayout
         if (findViewById<View>(R.id.fragment_container) != null) {
@@ -67,7 +72,6 @@ class LogHistoryActivity : ToolbarActivity() {
             // In case this activity was started with special instructions from an
             // Intent, pass the Intent's extras to the fragment as arguments
             // firstFragment.arguments = intent.extras
-
             logFragment?.let {
                 supportFragmentManager.beginTransaction()
                     .add(R.id.fragment_container, it).commit()

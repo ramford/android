@@ -51,7 +51,7 @@ import com.owncloud.android.files.services.TransferRequester;
 import com.owncloud.android.lib.common.operations.RemoteOperation;
 import com.owncloud.android.lib.common.operations.RemoteOperationResult;
 import com.owncloud.android.operations.CheckCurrentCredentialsOperation;
-import com.owncloud.android.presentation.ui.toolbar.ToolbarStatus;
+import com.owncloud.android.presentation.ui.toolbar.ToolbarConfig;
 import com.owncloud.android.ui.fragment.UploadListFragment;
 import com.owncloud.android.utils.MimetypeIconUtil;
 import timber.log.Timber;
@@ -86,7 +86,7 @@ public class UploadListActivity extends FileActivity implements UploadListFragme
         setFile(null);
 
         // setup toolbar
-        setupToolbar(ToolbarStatus.TOOLBAR_ROOT);
+        setupToolbar(new ToolbarConfig.ToolbarRoot(getResources().getString(R.string.uploads_view_title), false));
 
         // setup drawer
         setupDrawer();
@@ -98,8 +98,6 @@ public class UploadListActivity extends FileActivity implements UploadListFragme
         if (savedInstanceState == null) {
             createUploadListFragment();
         } // else, the Fragment Manager makes the job on configuration changes
-
-        super.updateActionBarTitleAndHomeButtonByString(getString(R.string.uploads_view_title));
 
         mLocalBroadcastManager = LocalBroadcastManager.getInstance(this);
     }
@@ -335,7 +333,6 @@ public class UploadListActivity extends FileActivity implements UploadListFragme
     @Override
     protected void onAccountSet(boolean stateWasRecovered) {
         super.onAccountSet(stateWasRecovered);
-        super.updateActionBarTitleAndHomeButtonByString(getString(R.string.uploads_view_title));
         if (mAccountWasSet) {
             setAccountInDrawer(getAccount());
         }

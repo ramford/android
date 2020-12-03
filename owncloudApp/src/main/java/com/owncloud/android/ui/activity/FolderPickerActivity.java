@@ -38,7 +38,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -50,9 +49,8 @@ import com.owncloud.android.lib.common.operations.RemoteOperationResult.ResultCo
 import com.owncloud.android.operations.CreateFolderOperation;
 import com.owncloud.android.operations.RefreshFolderOperation;
 import com.owncloud.android.operations.common.SyncOperation;
-import com.owncloud.android.presentation.ui.toolbar.ToolbarStatus;
+import com.owncloud.android.presentation.ui.toolbar.ToolbarConfig.ToolbarStandard;
 import com.owncloud.android.syncadapter.FileSyncAdapter;
-import com.owncloud.android.ui.dialog.CreateFolderDialogFragment;
 import com.owncloud.android.ui.errorhandling.ErrorMessageAdapter;
 import com.owncloud.android.ui.fragment.FileFragment;
 import com.owncloud.android.ui.fragment.OCFileListFragment;
@@ -100,7 +98,7 @@ public class FolderPickerActivity extends FileActivity implements FileFragment.C
         initControls();
 
         // Action bar setup
-        setupToolbar(ToolbarStatus.TOOLBAR_PICKER);
+        updateNavigationElementsInActionBar();
 
         // sets message for empty list of folders
         setBackgroundText();
@@ -329,7 +327,10 @@ public class FolderPickerActivity extends FileActivity implements FileFragment.C
     protected void updateNavigationElementsInActionBar() {
         OCFile currentDir = getCurrentFolder();
         boolean atRoot = (currentDir == null || currentDir.getParentId() == 0);
-        super.updateActionBarTitleAndHomeButtonByString(atRoot ? getString(R.string.default_display_name_for_root_folder) : currentDir.getFileName());
+        ToolbarStandard toolbarConfig = new ToolbarStandard(
+                atRoot ? getString(R.string.default_display_name_for_root_folder) : currentDir.getFileName(),
+                false);
+        setupToolbar(toolbarConfig);
     }
 
     /**

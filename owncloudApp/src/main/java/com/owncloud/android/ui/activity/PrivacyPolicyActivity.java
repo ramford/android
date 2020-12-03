@@ -33,7 +33,7 @@ import android.widget.ProgressBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.owncloud.android.R;
 import com.owncloud.android.presentation.ui.toolbar.ToolbarActivity;
-import com.owncloud.android.presentation.ui.toolbar.ToolbarStatus;
+import com.owncloud.android.presentation.ui.toolbar.ToolbarConfig.ToolbarStandard;
 import com.owncloud.android.utils.PreferenceUtils;
 
 /**
@@ -47,9 +47,8 @@ public class PrivacyPolicyActivity extends ToolbarActivity {
 
         setContentView(R.layout.activity_privacy_policy);
 
-        setupToolbar(ToolbarStatus.TOOLBAR_STANDARD);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ToolbarStandard toolbarConfig = new ToolbarStandard(getResources().getString(R.string.actionbar_privacy_policy), true);
+        setupToolbar(toolbarConfig);
 
         setTitle(getText(R.string.actionbar_privacy_policy));
 
@@ -101,12 +100,10 @@ public class PrivacyPolicyActivity extends ToolbarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         boolean retval = true;
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                break;
-            default:
-                retval = super.onOptionsItemSelected(item);
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        } else {
+            retval = super.onOptionsItemSelected(item);
         }
         return retval;
     }

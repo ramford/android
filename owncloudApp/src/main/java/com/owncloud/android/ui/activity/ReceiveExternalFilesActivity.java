@@ -56,11 +56,14 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.owncloud.android.MainApp;
@@ -80,7 +83,6 @@ import com.owncloud.android.presentation.ui.files.SortOptionsView;
 import com.owncloud.android.presentation.ui.files.SortOrder;
 import com.owncloud.android.presentation.ui.files.SortType;
 import com.owncloud.android.presentation.ui.files.ViewType;
-import com.owncloud.android.presentation.ui.toolbar.ToolbarConfig;
 import com.owncloud.android.syncadapter.FileSyncAdapter;
 import com.owncloud.android.ui.adapter.ReceiveExternalFilesAdapter;
 import com.owncloud.android.ui.asynctasks.CopyAndUploadContentUrisTask;
@@ -401,20 +403,7 @@ public class ReceiveExternalFilesActivity extends FileActivity
         setContentView(R.layout.uploader_layout);
 
         // init toolbar
-        String current_dir = mParents.peek();
-        String actionBarTitle;
-        if (current_dir.equals("")) {
-            actionBarTitle = getString(R.string.uploader_top_message);
-        } else {
-            actionBarTitle = current_dir;
-        }
-
-        boolean notRoot = (mParents.size() > 1);
-        setupToolbar(new ToolbarConfig.ToolbarStandard(
-                actionBarTitle,
-                notRoot,
-                notRoot)
-        );
+        initToolbar();
 
         mSortOptionsView = findViewById(R.id.options_layout);
         if (mSortOptionsView != null) {
@@ -966,6 +955,35 @@ public class ReceiveExternalFilesActivity extends FileActivity
             if (window != null) {
                 window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
             }
+        }
+    }
+
+    /**
+     * This activity uses its own toolbar, so we can not use the ToolbarActivity method to initialize the actionbar.
+     */
+    private void initToolbar() {
+        Toolbar toolbar = findViewById(R.id.standard_toolbar);
+        MaterialCardView rootToolbar = findViewById(R.id.root_toolbar);
+        toolbar.setVisibility(View.VISIBLE);
+        rootToolbar.setVisibility(View.GONE);
+
+        String current_dir = mParents.peek();
+        String actionBarTitle;
+        if (current_dir.equals("")) {
+            actionBarTitle = getString(R.string.uploader_top_message);
+        } else {
+            actionBarTitle = current_dir;
+        }
+        toolbar.setTitle(actionBarTitle);
+        setSupportActionBar(toolbar);
+
+        ActionBar actionBar = getSupportActionBar();
+
+        boolean notRoot = (mParents.size() > 1);
+
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(notRoot);
+            actionBar.setHomeButtonEnabled(notRoot);
         }
     }
 

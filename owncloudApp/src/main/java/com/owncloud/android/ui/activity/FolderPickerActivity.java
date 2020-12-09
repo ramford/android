@@ -108,11 +108,6 @@ public class FolderPickerActivity extends FileActivity implements FileFragment.C
         Timber.d("onCreate() end");
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
     /**
      * Called when the ownCloud {@link Account} associated to the Activity was just updated.
      */
@@ -264,16 +259,13 @@ public class FolderPickerActivity extends FileActivity implements FileFragment.C
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         boolean retval = true;
-        switch (item.getItemId()) {
-            case android.R.id.home: {
-                OCFile currentDir = getCurrentFolder();
-                if (currentDir != null && currentDir.getParentId() != 0) {
-                    onBackPressed();
-                }
-                break;
+        if (item.getItemId() == android.R.id.home) {
+            OCFile currentDir = getCurrentFolder();
+            if (currentDir != null && currentDir.getParentId() != 0) {
+                onBackPressed();
             }
-            default:
-                retval = super.onOptionsItemSelected(item);
+        } else {
+            retval = super.onOptionsItemSelected(item);
         }
         return retval;
     }
@@ -329,7 +321,8 @@ public class FolderPickerActivity extends FileActivity implements FileFragment.C
         boolean atRoot = (currentDir == null || currentDir.getParentId() == 0);
         ToolbarStandard toolbarConfig = new ToolbarStandard(
                 atRoot ? getString(R.string.default_display_name_for_root_folder) : currentDir.getFileName(),
-                false);
+                !atRoot,
+                !atRoot);
         setupToolbar(toolbarConfig);
     }
 

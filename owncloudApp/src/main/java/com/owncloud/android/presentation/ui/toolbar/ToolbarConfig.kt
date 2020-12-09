@@ -24,7 +24,8 @@ package com.owncloud.android.presentation.ui.toolbar
 sealed class ToolbarConfig {
     class ToolbarStandard(
         val title: String?,
-        val addIconNavigation: Boolean,
+        val displayHomeAsUpEnabled: Boolean,
+        val homeButtonEnabled: Boolean
     ) : ToolbarConfig()
 
     class ToolbarRoot(

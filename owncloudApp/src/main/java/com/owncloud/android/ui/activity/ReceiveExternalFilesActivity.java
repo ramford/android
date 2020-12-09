@@ -56,7 +56,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.appcompat.widget.SearchView;
@@ -400,13 +399,22 @@ public class ReceiveExternalFilesActivity extends FileActivity
 
     private void populateDirectoryList() {
         setContentView(R.layout.uploader_layout);
-        // init toolbar
-        setupToolbar(new ToolbarConfig.ToolbarStandard(
-                getResources().getString(R.string.default_display_name_for_root_folder),
-                false)
-        );
 
-        ActionBar actionBar = getSupportActionBar();
+        // init toolbar
+        String current_dir = mParents.peek();
+        String actionBarTitle;
+        if (current_dir.equals("")) {
+            actionBarTitle = getString(R.string.uploader_top_message);
+        } else {
+            actionBarTitle = current_dir;
+        }
+
+        boolean notRoot = (mParents.size() > 1);
+        setupToolbar(new ToolbarConfig.ToolbarStandard(
+                actionBarTitle,
+                notRoot,
+                notRoot)
+        );
 
         mSortOptionsView = findViewById(R.id.options_layout);
         if (mSortOptionsView != null) {
@@ -417,18 +425,6 @@ public class ReceiveExternalFilesActivity extends FileActivity
 
         ListView mListView = findViewById(android.R.id.list);
         mEmptyListMessage = findViewById(R.id.empty_list_view);
-
-        String current_dir = mParents.peek();
-        if (current_dir.equals("")) {
-            actionBar.setTitle(getString(R.string.uploader_top_message));
-        } else {
-            actionBar.setTitle(current_dir);
-        }
-
-        boolean notRoot = (mParents.size() > 1);
-
-        actionBar.setDisplayHomeAsUpEnabled(notRoot);
-        actionBar.setHomeButtonEnabled(notRoot);
 
         String full_path = generatePath(mParents);
 
@@ -639,14 +635,12 @@ public class ReceiveExternalFilesActivity extends FileActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         boolean retval = true;
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                if ((mParents.size() > 1)) {
-                    onBackPressed();
-                }
-                break;
-            default:
-                retval = super.onOptionsItemSelected(item);
+        if (item.getItemId() == android.R.id.home) {
+            if ((mParents.size() > 1)) {
+                onBackPressed();
+            }
+        } else {
+            retval = super.onOptionsItemSelected(item);
         }
         return retval;
     }

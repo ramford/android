@@ -101,6 +101,7 @@ public class ManageAccountsActivity extends FileActivity
 
         ToolbarConfig.ToolbarStandard toolbarConfig = new ToolbarConfig.ToolbarStandard(
                 getResources().getString(R.string.prefs_manage_accounts),
+                true,
                 true
         );
         setupToolbar(toolbarConfig);

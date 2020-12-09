@@ -26,7 +26,6 @@ package com.owncloud.android.presentation.ui.toolbar
 import android.view.View
 import android.view.View.VISIBLE
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.google.android.material.textview.MaterialTextView
 import com.owncloud.android.R
@@ -60,7 +59,9 @@ abstract class ToolbarActivity : BaseActivity() {
 
         standardToolbar.title?.let { standard_toolbar?.title = it }
         setSupportActionBar(standard_toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(standardToolbar.addIconNavigation)
+        supportActionBar?.setDisplayHomeAsUpEnabled(standardToolbar.displayHomeAsUpEnabled)
+        supportActionBar?.setHomeButtonEnabled(standardToolbar.homeButtonEnabled)
+        supportActionBar?.setDisplayShowTitleEnabled(standardToolbar.title != null)
     }
 
     private fun configRootToolbar(rootToolbar: ToolbarConfig.ToolbarRoot) {

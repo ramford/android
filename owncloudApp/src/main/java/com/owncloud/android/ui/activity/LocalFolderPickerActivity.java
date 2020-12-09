@@ -33,7 +33,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import com.owncloud.android.R;
@@ -41,6 +40,7 @@ import com.owncloud.android.presentation.ui.toolbar.ToolbarActivity;
 import com.owncloud.android.presentation.ui.toolbar.ToolbarConfig;
 import com.owncloud.android.ui.fragment.LocalFileListFragment;
 import com.owncloud.android.utils.PreferenceUtils;
+import org.jetbrains.annotations.NotNull;
 import timber.log.Timber;
 
 import java.io.File;
@@ -65,9 +65,9 @@ public class LocalFolderPickerActivity extends ToolbarActivity implements LocalF
      * Helper to launch a {@link LocalFolderPickerActivity} for which you would like a result when finished.
      * Your onActivityResult() method will be called with the given requestCode.
      *
-     * @param activity      Activity calling {@link LocalFolderPickerActivity} for a result.
-     * @param startPath     Absolute path to the local folder to show when the activity is shown.
-     * @param requestCode   If >= 0, this code will be returned in onActivityResult().
+     * @param activity    Activity calling {@link LocalFolderPickerActivity} for a result.
+     * @param startPath   Absolute path to the local folder to show when the activity is shown.
+     * @param requestCode If >= 0, this code will be returned in onActivityResult().
      */
     public static void startLocalFolderPickerActivityForResult(
             Activity activity,
@@ -142,15 +142,6 @@ public class LocalFolderPickerActivity extends ToolbarActivity implements LocalF
         });
 
         // init toolbar
-        setupToolbar(new ToolbarConfig.ToolbarStandard(
-                getResources().getString(R.string.default_display_name_for_root_folder),
-                false)
-        );
-
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayShowTitleEnabled(true);
-        }
         updateActionBar();
 
         Timber.v("onCreate() end");
@@ -167,35 +158,31 @@ public class LocalFolderPickerActivity extends ToolbarActivity implements LocalF
      * Updates contents shown by action bar.
      */
     private void updateActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            boolean mayBrowseUp = mayBrowseUp();
-            actionBar.setHomeButtonEnabled(mayBrowseUp);
-            actionBar.setDisplayHomeAsUpEnabled(mayBrowseUp);
-            actionBar.setTitle(mayBrowseUp ? mCurrentFolder.getName() : File.separator);
-        } else {
-            Timber.w("Action bar missing in action");
-        }
+        boolean mayBrowseUp = mayBrowseUp();
+
+        setupToolbar(new ToolbarConfig.ToolbarStandard(
+                        mayBrowseUp ? mCurrentFolder.getName() : File.separator,
+                        mayBrowseUp,
+                        mayBrowseUp
+                )
+        );
     }
 
     /**
      * Handles presses on 'Up' button, not exactly the same as 'BACK' button.
      *
-     * @param   item    Action in option menu tapped by the user.
-     * @return          'true' if consumed, 'false' otherwise.
+     * @param item Action in option menu tapped by the user.
+     * @return 'true' if consumed, 'false' otherwise.
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         boolean retval = true;
-        switch (item.getItemId()) {
-            case android.R.id.home: {
-                if (mayBrowseUp()) {
-                    onBackPressed();
-                }
-                break;
+        if (item.getItemId() == android.R.id.home) {
+            if (mayBrowseUp()) {
+                onBackPressed();
             }
-            default:
-                retval = super.onOptionsItemSelected(item);
+        } else {
+            retval = super.onOptionsItemSelected(item);
         }
         return retval;
     }
@@ -220,7 +207,7 @@ public class LocalFolderPickerActivity extends ToolbarActivity implements LocalF
     }
 
     /**
-     * @return  'true' when browsing to the parent folder is possible, 'false' otherwise
+     * @return 'true' when browsing to the parent folder is possible, 'false' otherwise
      */
     private boolean mayBrowseUp() {
         return (mCurrentFolder != null && mCurrentFolder.getParentFile() != null);
@@ -230,7 +217,7 @@ public class LocalFolderPickerActivity extends ToolbarActivity implements LocalF
      * {@inheritDoc}
      */
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(@NotNull Bundle outState) {
         Timber.v("onSaveInstanceState() start");
         super.onSaveInstanceState(outState);
         outState.putString(LocalFolderPickerActivity.EXTRA_PATH, mCurrentFolder.getAbsolutePath());

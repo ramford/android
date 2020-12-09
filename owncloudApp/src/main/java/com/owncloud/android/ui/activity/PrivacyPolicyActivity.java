@@ -47,7 +47,8 @@ public class PrivacyPolicyActivity extends ToolbarActivity {
 
         setContentView(R.layout.activity_privacy_policy);
 
-        ToolbarStandard toolbarConfig = new ToolbarStandard(getResources().getString(R.string.actionbar_privacy_policy), true);
+        ToolbarStandard toolbarConfig =
+                new ToolbarStandard(getResources().getString(R.string.actionbar_privacy_policy), true, true);
         setupToolbar(toolbarConfig);
 
         setTitle(getText(R.string.actionbar_privacy_policy));

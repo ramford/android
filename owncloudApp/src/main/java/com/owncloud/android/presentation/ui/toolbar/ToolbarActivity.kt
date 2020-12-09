@@ -23,13 +23,18 @@
  */
 package com.owncloud.android.presentation.ui.toolbar
 
+import android.content.Intent
 import android.view.View
 import android.view.View.VISIBLE
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
+import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
 import com.owncloud.android.R
+import com.owncloud.android.authentication.AccountUtils
 import com.owncloud.android.ui.activity.BaseActivity
+import com.owncloud.android.ui.activity.ManageAccountsActivity
+import com.owncloud.android.utils.AvatarUtils
 import kotlinx.android.synthetic.main.owncloud_toolbar.*
 
 /**
@@ -69,6 +74,7 @@ abstract class ToolbarActivity : BaseActivity() {
 
         val toolbarTitle = findViewById<MaterialTextView>(R.id.root_toolbar_title)
         val searchView = findViewById<SearchView>(R.id.root_toolbar_search_view)
+        val avatarView = findViewById<ShapeableImageView>(R.id.root_toolbar_avatar)
 
         with(toolbarTitle) {
             isVisible = true
@@ -88,6 +94,20 @@ abstract class ToolbarActivity : BaseActivity() {
                 searchView.visibility = View.GONE
                 toolbarTitle.visibility = VISIBLE
                 false
+            }
+        }
+
+        with(avatarView) {
+            AccountUtils.getCurrentOwnCloudAccount(context) ?: return@with
+
+            AvatarUtils().loadAvatarForAccount(
+                avatarView,
+                AccountUtils.getCurrentOwnCloudAccount(context),
+                true,
+                context.resources.getDimension(R.dimen.owncloud_toolbar_avatar_size)
+            )
+            setOnClickListener {
+                startActivity(Intent(context, ManageAccountsActivity::class.java))
             }
         }
     }

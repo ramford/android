@@ -33,9 +33,6 @@ import android.content.ServiceConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 
 import androidx.fragment.app.FragmentTransaction;
@@ -174,56 +171,6 @@ public class UploadListActivity extends FileActivity implements UploadListFragme
             Timber.i("Could not find app for sending log history.");
 
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        boolean retval = true;
-        UploadsStorageManager storageManager;
-        UploadListFragment uploadListFragment =
-                (UploadListFragment) getSupportFragmentManager().findFragmentByTag(TAG_UPLOAD_LIST_FRAGMENT);
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                if (isDrawerOpen()) {
-                    closeDrawer();
-                } else {
-                    openDrawer();
-                }
-            case R.id.action_retry_uploads:
-                TransferRequester requester = new TransferRequester();
-                requester.retryFailedUploads(this, null, null, false);
-                break;
-
-            case R.id.action_clear_failed_uploads:
-                storageManager = new UploadsStorageManager(getContentResolver());
-                storageManager.clearFailedButNotDelayedForWifiUploads();
-                uploadListFragment.updateUploads();
-                break;
-
-            case R.id.action_clear_successfull_uploads:
-                storageManager = new UploadsStorageManager(getContentResolver());
-                storageManager.clearSuccessfulUploads();
-                uploadListFragment.updateUploads();
-                break;
-
-            case R.id.action_clear_finished_uploads:
-                storageManager = new UploadsStorageManager(getContentResolver());
-                storageManager.clearAllFinishedButNotDelayedForWifiUploads();
-                uploadListFragment.updateUploads();
-                break;
-
-            default:
-                retval = super.onOptionsItemSelected(item);
-        }
-
-        return retval;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.upload_list_menu, menu);
-        return true;
     }
 
     @Override

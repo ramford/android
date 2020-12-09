@@ -47,6 +47,7 @@ import android.os.IBinder
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.material.snackbar.Snackbar
@@ -187,7 +188,7 @@ class FileDisplayActivity : FileActivity(), FileFragment.ContainerActivity, OnEn
         setContentView(R.layout.activity_main)
 
         val toolbarConfig = ToolbarConfig.ToolbarRoot(
-            title = "PAcpo",
+            title = getString(R.string.default_display_name_for_root_folder),
             enableSearch = true
         )
         // setup toolbar
@@ -327,6 +328,7 @@ class FileDisplayActivity : FileActivity(), FileFragment.ContainerActivity, OnEn
 
     private fun createMinFragments() {
         val listOfFiles = OCFileListFragment.newInstance(false, fileListOption, false, false, true)
+        listOfFiles.setSearchListener(findViewById(R.id.root_toolbar_search_view))
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(R.id.left_fragment_container, listOfFiles, TAG_LIST_OF_FILES)
         transaction.commit()
@@ -420,7 +422,7 @@ class FileDisplayActivity : FileActivity(), FileFragment.ContainerActivity, OnEn
     }
 
     fun showOrHideBottomNavBar(show: Boolean) {
-        bottom_nav_view.visibility = if (show) View.VISIBLE else View.GONE
+        bottom_nav_view.isVisible = show
     }
 
     private fun updateFragmentsVisibility(existsSecondFragment: Boolean) {
@@ -1135,6 +1137,7 @@ class FileDisplayActivity : FileActivity(), FileFragment.ContainerActivity, OnEn
                     FileListOption.ALL_FILES -> resources.getString(R.string.default_display_name_for_root_folder)
                 }
             setupToolbar(ToolbarConfig.ToolbarRoot(title, true))
+            listOfFilesFragment?.setSearchListener(findViewById(R.id.root_toolbar_search_view))
         } else {
             setupToolbar(ToolbarConfig.ToolbarStandard(chosenFile?.fileName!!, true))
         }

@@ -62,7 +62,8 @@
     <dimen name="file_list_progress_bar_height">4dp</dimen>
 
     <!-- ownCloud toolbar -->
-    <dimen name="owncloud_toolbar_avatar_size">40dp</dimen>
+    <dimen name="toolbar_avatar_size">40dp</dimen>
+    <dimen name="toolbar_avatar_radius">12dp</dimen>
 
     <!-- Bottom Sheet Fragment Item -->
     <dimen name="bottom_sheet_fragment_item_icon_size">24dp</dimen>

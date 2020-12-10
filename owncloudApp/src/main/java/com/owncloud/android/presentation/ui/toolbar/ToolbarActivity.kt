@@ -104,7 +104,7 @@ abstract class ToolbarActivity : BaseActivity() {
                 avatarView,
                 AccountUtils.getCurrentOwnCloudAccount(context),
                 true,
-                context.resources.getDimension(R.dimen.owncloud_toolbar_avatar_size)
+                context.resources.getDimension(R.dimen.toolbar_avatar_radius)
             )
             setOnClickListener {
                 startActivity(Intent(context, ManageAccountsActivity::class.java))

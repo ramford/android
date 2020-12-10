@@ -63,8 +63,8 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/root_toolbar_avatar"
-                android:layout_width="@dimen/owncloud_toolbar_avatar_size"
-                android:layout_height="@dimen/owncloud_toolbar_avatar_size"
+                android:layout_width="@dimen/toolbar_avatar_size"
+                android:layout_height="@dimen/toolbar_avatar_size"
                 android:padding="@dimen/standard_half_padding"
                 android:src="@drawable/ic_account_circle"
                 android:tint="@color/primary"

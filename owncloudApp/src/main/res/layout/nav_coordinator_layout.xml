@@ -42,6 +42,8 @@
         android:background="@color/actionbar_start_color"
         android:visibility="visible"
         app:itemIconTint="@color/primary_button_text_color"
+        app:itemTextAppearanceActive="@style/ownCloud.Appbar"
+        app:itemTextAppearanceInactive="@style/ownCloud.Appbar"
         app:itemTextColor="@color/primary_button_text_color"
         app:labelVisibilityMode="auto"
         app:layout_constraintBottom_toBottomOf="parent"

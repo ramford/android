@@ -61,7 +61,7 @@
         android:weightSum="3"
         android:gravity="center">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_no_thanks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
             android:textSize="12sp"
             android:text="@string/button_no_thanks_name" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_later"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
             android:textSize="12sp"
             android:text="@string/button_later_name" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_rate_now"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -2,7 +2,7 @@
   ownCloud Android client application
 
   Copyright (C) 2012  Bartek Przybylski
-  Copyright (C) 2016 ownCloud GmbH.
+  Copyright (C) 2020 ownCloud GmbH.
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License version 2,
@@ -134,12 +134,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:contentDescription="@string/auth_testing_connection"
-                android:drawableStart="@android:drawable/stat_notify_sync"
                 android:drawablePadding="5dp"
                 android:gravity="center_vertical"
                 android:minHeight="32dp"
                 android:textColor="@color/login_connection_text_color"
                 android:visibility="invisible"
+                app:drawableStartCompat="@android:drawable/stat_notify_sync"
                 app:drawableTint="@color/login_connection_text_color"
                 tools:text="@string/auth_testing_connection"
                 tools:visibility="visible" />
@@ -215,7 +215,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal">
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/welcome_link"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

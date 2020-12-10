@@ -1,4 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--
+  ownCloud Android client application
+
+  Copyright (C) 2020 ownCloud GmbH.
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License version 2,
+  as published by the Free Software Foundation.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
 <com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/owncloud_app_bar"
@@ -15,7 +31,7 @@
         android:layout_marginEnd="@dimen/standard_half_margin"
         android:layout_marginBottom="@dimen/standard_half_margin"
         android:backgroundTint="@color/white"
-        app:cardCornerRadius="6dp">
+        app:cardCornerRadius="@dimen/toolbar_card_corner_radius">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -37,16 +53,15 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:gravity="center_vertical"
-                android:textSize="16sp"
                 android:visibility="gone"
-                app:queryHint="@string/actionbar_search"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/root_toolbar_avatar"
-                app:layout_constraintStart_toEndOf="@+id/root_toolbar_left_icon"
+                app:layout_constraintEnd_toStartOf="@id/root_toolbar_avatar"
+                app:layout_constraintStart_toEndOf="@id/root_toolbar_left_icon"
                 app:layout_constraintTop_toTopOf="parent"
+                app:queryHint="@string/actionbar_search"
                 app:searchHintIcon="@null" />
 
-            <com.google.android.material.textview.MaterialTextView
+            <TextView
                 android:id="@+id/root_toolbar_title"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -55,10 +70,10 @@
                 android:ellipsize="end"
                 android:gravity="center_vertical"
                 android:maxLines="1"
-                android:textSize="18sp"
+                android:textSize="@dimen/toolbar_title_text_size"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/root_toolbar_avatar"
-                app:layout_constraintStart_toEndOf="@+id/root_toolbar_left_icon"
+                app:layout_constraintEnd_toStartOf="@id/root_toolbar_avatar"
+                app:layout_constraintStart_toEndOf="@id/root_toolbar_left_icon"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.imageview.ShapeableImageView

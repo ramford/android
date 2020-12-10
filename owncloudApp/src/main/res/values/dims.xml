@@ -62,6 +62,8 @@
     <dimen name="file_list_progress_bar_height">4dp</dimen>
 
     <!-- ownCloud toolbar -->
+    <dimen name="toolbar_card_corner_radius">6dp</dimen>
+    <dimen name="toolbar_title_text_size">18sp</dimen>
     <dimen name="toolbar_avatar_size">40dp</dimen>
     <dimen name="toolbar_avatar_radius">12dp</dimen>
 

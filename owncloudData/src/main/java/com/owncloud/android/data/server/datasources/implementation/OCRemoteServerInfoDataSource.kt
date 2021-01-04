@@ -31,7 +31,6 @@ import com.owncloud.android.lib.resources.status.services.ServerInfoService
 import com.owncloud.android.lib.resources.status.OwnCloudVersion
 
 class OCRemoteServerInfoDataSource(
-    private val context: Context,
     private val serverInfoService: ServerInfoService
 ) : RemoteServerInfoDataSource {
 

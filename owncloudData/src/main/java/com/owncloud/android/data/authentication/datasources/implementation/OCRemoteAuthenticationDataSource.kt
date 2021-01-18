@@ -46,7 +46,7 @@ class OCRemoteAuthenticationDataSource(
         val url: Uri = Uri.parse(serverPath)
 
         val client: OwnCloudClient =
-            OwnCloudClientFactory.createOwnCloudClient(url, context, true).apply {
+            OwnCloudClientFactory.createOwnCloudClient(url, true).apply {
                 credentials = ownCloudCredentials
             }
 

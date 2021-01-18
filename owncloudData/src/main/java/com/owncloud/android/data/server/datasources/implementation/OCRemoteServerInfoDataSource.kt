@@ -19,6 +19,7 @@
 
 package com.owncloud.android.data.server.datasources.implementation
 
+import android.content.Context
 import com.owncloud.android.data.executeRemoteOperation
 import com.owncloud.android.data.server.datasources.RemoteServerInfoDataSource
 import com.owncloud.android.domain.exceptions.OwncloudVersionNotSupportedException
@@ -30,6 +31,7 @@ import com.owncloud.android.lib.resources.status.services.ServerInfoService
 import com.owncloud.android.lib.resources.status.OwnCloudVersion
 
 class OCRemoteServerInfoDataSource(
+    private val context: Context,
     private val serverInfoService: ServerInfoService
 ) : RemoteServerInfoDataSource {
 

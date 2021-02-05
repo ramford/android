@@ -30,7 +30,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.owncloud.android.R;
 
 /**
@@ -58,7 +57,7 @@ public class ConflictsResolveDialog extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        return new MaterialAlertDialogBuilder(getActivity())
+        return new AlertDialog.Builder(getActivity())
                 .setIcon(R.drawable.ic_warning)
                 .setTitle(R.string.conflict_title)
                 .setMessage(getString(R.string.conflict_message))

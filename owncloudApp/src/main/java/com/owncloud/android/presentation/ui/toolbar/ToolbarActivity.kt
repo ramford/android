@@ -26,6 +26,7 @@ package com.owncloud.android.presentation.ui.toolbar
 import android.content.Intent
 import android.view.View
 import android.view.View.VISIBLE
+import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import com.google.android.material.imageview.ShapeableImageView
@@ -72,7 +73,7 @@ abstract class ToolbarActivity : BaseActivity() {
     private fun configRootToolbar(rootToolbar: ToolbarConfig.ToolbarRoot) {
         useStandardToolbar(false)
 
-        val toolbarTitle = findViewById<MaterialTextView>(R.id.root_toolbar_title)
+        val toolbarTitle = findViewById<TextView>(R.id.root_toolbar_title)
         val searchView = findViewById<SearchView>(R.id.root_toolbar_search_view)
         val avatarView = findViewById<ShapeableImageView>(R.id.root_toolbar_avatar)
 

@@ -26,7 +26,6 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.owncloud.android.R;
 
 public class ConfirmationDialogFragment extends DialogFragment {
@@ -97,7 +96,7 @@ public class ConfirmationDialogFragment extends DialogFragment {
             messageArguments = new String[]{};
         }
 
-        AlertDialog.Builder builder = new MaterialAlertDialogBuilder(getActivity())
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
                 .setIcon(R.drawable.ic_warning)
                 .setIconAttribute(android.R.attr.alertDialogIcon)
                 .setMessage(String.format(getString(messageId), messageArguments));

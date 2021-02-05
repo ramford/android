@@ -7,8 +7,8 @@ import android.preference.ListPreference;
 import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialog;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import timber.log.Timber;
 
 import java.lang.reflect.Method;
@@ -46,8 +46,8 @@ public class OwnCloudListPreference extends ListPreference {
         int preselect = findIndexOfValue(getValue());
 
         // same thing happens for the Standard ListPreference though
-        MaterialAlertDialogBuilder builder =
-                new MaterialAlertDialogBuilder(mContext)
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(mContext)
                         .setTitle(getDialogTitle())
                         .setIcon(getDialogIcon())
                         .setSingleChoiceItems(getEntries(), preselect, this);

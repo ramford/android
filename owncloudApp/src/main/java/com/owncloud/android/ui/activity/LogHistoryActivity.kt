@@ -39,8 +39,8 @@ class LogHistoryActivity : ToolbarActivity() {
         setupToolbar(
             ToolbarStandard(
                 title = getString(R.string.actionbar_logger),
-                displayHomeAsUpEnabled = true,
-                homeButtonEnabled = true
+                displayHomeAsUpEnabled = false,
+                homeButtonEnabled = false
             )
         )
 

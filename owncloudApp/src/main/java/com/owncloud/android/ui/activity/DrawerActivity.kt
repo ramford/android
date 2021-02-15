@@ -34,6 +34,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
@@ -248,7 +249,7 @@ abstract class DrawerActivity : ToolbarActivity() {
         super.setupToolbar(toolbarConfig)
 
         if (toolbarConfig is ToolbarConfig.ToolbarRoot) {
-            val toolbarLeftIcon = findViewById<ShapeableImageView>(R.id.root_toolbar_left_icon)
+            val toolbarLeftIcon = findViewById<ImageView>(R.id.root_toolbar_left_icon)
             toolbarLeftIcon.setOnClickListener { openDrawer() }
         }
     }

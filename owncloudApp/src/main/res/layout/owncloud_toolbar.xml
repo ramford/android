@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.imageview.ShapeableImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/root_toolbar_left_icon"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -53,7 +53,7 @@
             app:queryHint="@string/actionbar_search"
             app:searchHintIcon="@null" />
 
-        <com.google.android.material.textview.MaterialTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/root_toolbar_title"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -73,7 +73,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="ownCloud" />
 
-        <com.google.android.material.imageview.ShapeableImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/root_toolbar_avatar"
             android:layout_width="@dimen/toolbar_avatar_size"
             android:layout_height="@dimen/toolbar_avatar_size"
